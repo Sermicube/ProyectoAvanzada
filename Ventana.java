@@ -7,7 +7,7 @@ import javax.swing.*;
 public class Ventana {
   // DECLARACIÓN DE VARIABLES
   // FRAME
-  private JFrame frame;
+  static JFrame frame;
   // VISTA INICIAL
   private JPanel panelppt;
   private JButton iniciar;
@@ -19,15 +19,13 @@ public class Ventana {
   private JLabel fondomenu;
   private ImageIcon imagemenu;
   //JUEGO
-  private JPanel gamepanel;
+  static JPanel gamepanel;
   private JLabel background;
   private ImageIcon gameimage;
-  private int mat[][];
-  private JLabel matriz[][];
+  static int mat[][];
+  static JLabel matriz[][];
   private int px;
   private int py;
-  private int fanx;
-  private int fany;
   private int up;
   private int down;
   private int left;
@@ -97,10 +95,7 @@ public class Ventana {
     py=1;
     mat[px][py]=3;
 
-    fanx=10;
-    fany=10;
-    mat[fanx][fany]=7;
-
+    Fantasma fan1= new Fantasma(13,13);
     up=0;
     left=0;
     right=0;
@@ -293,6 +288,19 @@ public class Ventana {
           py=py+1;
           mat[px][py]=0;
           drawMatrix();
+        }
+        int found=0;
+        for(int i=0;i<mat.length&&found==0;i++){
+          for(int j=0;j<mat.length&&found==0;j++){
+            if(mat[i][j]==1)
+              found=1;
+          }
+        }
+        if(found==0){
+          JOptionPane.showMessageDialog(frame,"FELICITACIONES, COMPLETÓ EL NIVEL ");
+          gamepanel.setVisible(false);
+          panelmenu.setVisible(true);
+          timer.stop();
         }
       }
     });
