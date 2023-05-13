@@ -35,6 +35,8 @@ public class Ventana {
   private int points;
   private JLabel records;
   private Timer timer;
+  Fantasma fan1;
+  static int maTA[][];
 
   public Ventana() {
     // CONFIGURACIÓN VENTANA
@@ -84,6 +86,7 @@ public class Ventana {
     //GAME
     mat=new int[15][15];
     matriz=new JLabel[15][15];
+    maTA=new int[15][15];
     for (int i=0;i<mat.length;i++){
       for (int j=0;j<mat.length;j++){
         matriz[i][j]=new JLabel();
@@ -95,7 +98,7 @@ public class Ventana {
     py=1;
     mat[px][py]=3;
 
-    Fantasma fan1= new Fantasma(13,13);
+
     up=0;
     left=0;
     right=0;
@@ -232,10 +235,11 @@ public class Ventana {
 
 
     move();
+    fan1= new Fantasma(13,13);
     frame.add(gamepanel);
   }
 
-  public void drawMatrix(){
+  public static void drawMatrix(){
     for(int i=0;i<mat.length;i++){
       for (int j=0;j<mat.length;j++){
         matriz[i][j].setIcon(new ImageIcon("Imagenes/"+mat[i][j]+".png"));
